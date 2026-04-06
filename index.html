@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마음 건강 체크 · PHQ-9 | 심리상담연구소 심지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:   #FDF6EE;
+  --peach:   #F9EDE3;
+  --rose:    #F2C4B0;
+  --rose-d:  #D4896E;
+  --rose-dk: #A85E44;
+  --sage:    #C8D9BE;
+  --sage-d:  #6E9360;
+  --mist:    #E8DDD5;
+  --text:    #3D2B1F;
+  --text-m:  #7A5C4E;
+  --text-f:  #B09080;
+  --white:   #FFFCF9;
+  --r: 24px;
+  --r-lg: 32px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Gowun Dodum', serif;
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(242,196,176,0.22) 0%, transparent 50%),
+    radial-gradient(circle at 85% 80%, rgba(200,217,190,0.2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(249,237,227,0.15) 0%, transparent 70%);
+  min-height: 100vh;
+  color: var(--text);
+  padding: 2rem 1rem 4rem;
+}
+
+/* --- Layout --- */
+.wrap { max-width: 560px; margin: 0 auto; }
+
+/* --- Site header --- */
+.site-top {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: floatIn 0.7s ease both;
+}
+.site-logo {
+  display: inline-block;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 13px;
+  color: var(--text-f);
+  letter-spacing: 0.12em;
+  padding: 6px 18px;
+  border: 1px solid var(--mist);
+  border-radius: 40px;
+  background: var(--white);
+}
+
+/* --- Decorative circles --- */
+.deco {
+  position: fixed; pointer-events: none; z-index: 0;
+  border-radius: 50%;
+  opacity: 0.35;
+}
+.deco-1 { width: 280px; height: 280px; background: var(--rose); top: -80px; right: -80px; }
+.deco-2 { width: 200px; height: 200px; background: var(--sage); bottom: -60px; left: -60px; }
+
+/* --- Card base --- */
+.card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--r-lg);
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(210,170,150,0.25);
+  box-shadow: 0 8px 32px rgba(180,120,90,0.09), 0 2px 8px rgba(180,120,90,0.05);
+  z-index: 1;
+  animation: cardIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}
+.card + .card { margin-top: 1rem; }
+
+/* --- Intro --- */
+.intro-icon {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.heart-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, #F9DDD3, #F2C4B0);
+  border-radius: 50%;
+  font-size: 32px;
+}
+.intro-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.intro-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-f);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+.intro-body {
+  background: var(--peach);
+  border-radius: var(--r);
+  padding: 1.1rem 1.25rem;
+  font-size: 14px;
+  color: var(--text-m);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.intro-body strong { color: var(--rose-dk); font-weight: 400; }
+.info-row {
+  display: flex; gap: 10px; margin-bottom: 1.5rem;
+}
+.info-pill {
+  flex: 1; text-align: center;
+  background: var(--cream);
+  border: 1px solid var(--mist);
+  border-radius: 40px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text-m);
+}
+.info-pill span { display: block; font-size: 11px; color: var(--text-f); margin-bottom: 2px; }
+
+/* --- Progress dots --- */
+.progress-wrap {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  margin-bottom: 1.75rem;
+  z-index: 1;
+  position: relative;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--mist);
+  transition: all 0.3s ease;
+}
+.dot.done { background: var(--rose); transform: scale(1.0); }
+.dot.active { background: var(--rose-dk); transform: scale(1.35); }
+
+/* --- Question card --- */
+.q-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px;
+  color: var(--text-f);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.85rem;
+}
+.q-num-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  background: var(--peach);
+  border-radius: 50%;
+  font-size: 11px;
+  color: var(--rose-dk);
+  font-weight: bold;
+}
+.q-text {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+.q-guide {
+  font-size: 12px;
+  color: var(--text-f);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/* --- Option buttons --- */
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%;
+  background: var(--cream);
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: 'Gowun Dodum', serif;
+}
+.opt-btn:hover {
+  background: var(--peach);
+  border-color: var(--rose);
+  transform: translateX(3px);
+}
+.opt-btn.selected {
+  background: linear-gradient(135deg, #FDE8DF, #F9D8CB);
+  border-color: var(--rose-d);
+  transform: translateX(3px);
+}
+.opt-circle {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--mist);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--text-f);
+  background: white;
+  transition: all 0.2s;
+}
+.opt-btn.selected .opt-circle {
+  background: var(--rose-d);
+  border-color: var(--rose-d);
+  color: white;
+}
+.opt-text-wrap { flex: 1; }
+.opt-score-label { font-size: 11px; color: var(--text-f); margin-bottom: 1px; }
+.opt-label { font-size: 14px; color: var(--text); }
+.opt-btn.selected .opt-label { color: var(--rose-dk); font-weight: bold; }
+
+/* --- Navigation --- */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1.5rem; gap: 12px;
+}
+.btn {
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-family: 'Gowun Dodum', serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--mist);
+  color: var(--text-m);
+}
+.btn-ghost:hover { background: var(--peach); border-color: var(--rose); }
+.btn-primary {
+  background: linear-gradient(135deg, #E8967E, #D4896E);
+  color: white;
+  box-shadow: 0 4px 16px rgba(180,100,70,0.25);
+  flex: 1;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(180,100,70,0.3); }
+.btn-primary:disabled { background: var(--mist); color: var(--text-f); box-shadow: none; transform: none; cursor: not-allowed; }
+.btn-start {
+  width: 100%;
+  padding: 15px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #E8967E, #D4896E);
+  color: white;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 6px 24px rgba(180,100,70,0.28);
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(180,100,70,0.35); }
+
+/* --- Result --- */
+.result-header { text-align: center; margin-bottom: 2rem; }
+.result-score-ring {
+  position: relative;
+  display: inline-flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 130px; height: 130px;
+  background: linear-gradient(135deg, #FDE8DF, #F9D5C2);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  box-shadow: 0 8px 28px rgba(200,130,100,0.22);
+}
+.result-score-num {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 46px;
+  font-weight: 700;
+  color: var(--rose-dk);
+  line-height: 1;
+}
+.result-score-max { font-size: 13px; color: var(--text-f); margin-top: 2px; }
+.result-level-badge {
+  display: inline-block;
+  padding: 7px 20px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.lv0 { background: #E4F0DC; color: #4A7C3A; }
+.lv1 { background: #FEF0DC; color: #8A6020; }
+.lv2 { background: #FDE4D5; color: #A04820; }
+.lv3 { background: #FAD6D0; color: #8C2A1E; }
+.lv4 { background: #F5BFBA; color: #7C1A14; }
+
+.result-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.result-sub { font-size: 13px; color: var(--text-f); }
+
+.result-desc-card {
+  background: var(--peach);
+  border-radius: var(--r);
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1rem;
+}
+.result-desc-card h3 {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 14px;
+  color: var(--rose-dk);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.result-desc-card p { font-size: 14px; color: var(--text-m); line-height: 1.8; }
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 4px;
+}
+.score-table td { padding: 6px 4px; color: var(--text-m); }
+.score-table td:last-child { text-align: right; color: var(--text-f); }
+.score-table tr.current td { color: var(--rose-dk); font-weight: bold; }
+
+.disclaimer {
+  background: var(--cream);
+  border-left: 3px solid var(--rose);
+  border-radius: 0 12px 12px 0;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--text-f);
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+.btn-restart {
+  width: 100%;
+  padding: 13px;
+  border-radius: 40px;
+  background: transparent;
+  border: 1.5px solid var(--rose);
+  color: var(--rose-dk);
+  font-family: 'Gowun Dodum', serif;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: all 0.2s;
+}
+.btn-restart:hover { background: var(--peach); }
+
+/* --- Animations --- */
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- Footer --- */
+.site-footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 11px;
+  color: var(--text-f);
+  letter-spacing: 0.06em;
+  position: relative; z-index: 1;
+}
+
+@media (max-width: 420px) {
+  body { padding: 1.5rem 0.75rem 3rem; }
+  .card { padding: 1.5rem 1.25rem; }
+  .q-text { font-size: 16px; }
+  .info-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="deco deco-1"></div>
+<div class="deco deco-2"></div>
+
+<div class="wrap">
+  <div class="site-top">
+    <span class="site-logo">심리상담연구소 심지</span>
+  </div>
+  <div id="app"></div>
+  <div class="site-footer">© 심리상담연구소 심지 · 아들러 개인심리학 기반 상담</div>
+</div>
+
+<script>
+const questions = [
+  { title: "흥미와 즐거움", text: "일 또는 여가 활동을 하는 데 흥미나 즐거움을 거의 느끼지 못했다." },
+  { title: "우울감·무력감", text: "기분이 가라앉거나, 우울하거나, 희망이 없다고 느꼈다." },
+  { title: "수면 문제", text: "잠이 들거나 계속 잠을 자는 것이 어려웠다. 또는 잠을 너무 많이 잤다." },
+  { title: "피로·기운 없음", text: "피곤함을 느끼거나 기운이 거의 없었다." },
+  { title: "식욕 변화", text: "식욕이 없거나 과식을 했다." },
+  { title: "자기 비난", text: "자신이 실패자로 여겨지거나, 자신 또는 가족을 실망시켰다고 느꼈다." },
+  { title: "집중 어려움", text: "신문을 읽거나 TV를 보는 것처럼 일상적인 일에도 집중하기 어려웠다." },
+  { title: "행동·말투 변화", text: "다른 사람이 알아챌 정도로 너무 느리게 움직이거나 말했다. 또는 반대로 평소보다 안절부절 못하거나 들떠 있었다." },
+  { title: "자해·죽음에 대한 생각", text: "자신이 죽는 것이 더 낫겠다는 생각 또는 어떤 식으로든 자신을 해치겠다는 생각을 했다." }
+];
+
+const options = [
+  { label: "전혀 없었다", score: 0 },
+  { label: "며칠 동안", score: 1 },
+  { label: "7일 이상", score: 2 },
+  { label: "거의 매일", score: 3 }
+];
+
+const levels = [
+  { max: 4,  cls: "lv0", name: "정상 범위", desc: "현재 우울 증상이 거의 없는 건강한 상태입니다. 지금처럼 자신을 잘 돌봐 주세요." },
+  { max: 9,  cls: "lv1", name: "가벼운 우울", desc: "경미한 우울 증상이 있습니다. 충분한 휴식과 자기 돌봄이 도움이 될 수 있으며, 증상이 지속되면 전문가 상담을 권장합니다." },
+  { max: 14, cls: "lv2", name: "중간 수준의 우울", desc: "일상생활에서 어려움을 느낄 수 있는 수준입니다. 전문 상담사나 의사와의 상담을 권장합니다." },
+  { max: 19, cls: "lv3", name: "중간~심한 우울", desc: "일상적인 기능이 상당히 저하될 수 있는 수준입니다. 가능한 빠른 시일 내에 전문 정신건강 전문가의 도움을 받으시기 바랍니다." },
+  { max: 27, cls: "lv4", name: "심한 우울", desc: "즉각적인 전문가 도움이 필요한 수준입니다. 가까운 정신건강 복지센터나 병·의원을 방문하시거나, 정신건강 위기상담 전화(☎ 1577-0199)에 연락해 주세요." }
+];
+
+let answers = new Array(9).fill(null);
+let current = 0;
+let view = 'intro';
+
+function getLevel(score) {
+  return levels.find(l => score <= l.max) || levels[levels.length - 1];
+}
+
+function render() {
+  document.getElementById('app').innerHTML =
+    view === 'intro'  ? renderIntro()  :
+    view === 'result' ? renderResult() : renderQ();
+  if (view === 'q') attachOpts();
+}
+
+function renderDots() {
+  return `<div class="progress-wrap">
+    ${questions.map((_, i) => {
+      const cls = i < current ? 'done' : i === current ? 'active' : '';
+      return `<div class="dot ${cls}"></div>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderIntro() {
+  return `
+  <div class="card" style="animation-delay:0.05s">
+    <div class="intro-icon"><div class="heart-circle">🌸</div></div>
+    <div class="intro-title">마음 건강 체크</div>
+    <div class="intro-sub">PHQ-9 우울 선별 검사</div>
+    <div class="intro-body">
+      <strong>지난 2주 동안</strong>, 아래 문제들로 인해 얼마나 자주 불편함을 느끼셨나요?<br>
+      각 문항을 읽고 자신에게 해당하는 답변을 솔직하게 선택해 주세요.<br>
+      정확하게 응답할수록 더 도움이 되는 결과를 얻을 수 있어요.
+    </div>
+    <div class="info-row">
+      <div class="info-pill"><span>문항 수</span>9문항</div>
+      <div class="info-pill"><span>소요 시간</span>약 3분</div>
+      <div class="info-pill"><span>검사 방식</span>자기 보고</div>
+    </div>
+    <button class="btn-start" onclick="startTest()">검사 시작하기 🌿</button>
+  </div>
+  <div class="card" style="animation-delay:0.15s; padding: 1rem 1.5rem;">
+    <p style="font-size:12px; color:var(--text-f); line-height:1.8; text-align:center;">
+      이 검사는 전문적 진단을 대체하지 않습니다.<br>심각한 증상이 의심될 경우 전문가와 상담하세요.
+    </p>
+  </div>`;
+}
+
+function renderQ() {
+  const q = questions[current];
+  return `
+  ${renderDots()}
+  <div class="card">
+    <div class="q-label">
+      <div class="q-num-badge">${current + 1}</div>
+      ${q.title}
+    </div>
+    <div class="q-text">${q.text}</div>
+    <div class="q-guide">지난 2주 동안의 경험을 바탕으로 선택해 주세요.</div>
+    <div class="options">
+      ${options.map((o, i) => `
+        <button class="opt-btn${answers[current] === i ? ' selected' : ''}" data-i="${i}">
+          <div class="opt-circle">${o.score}</div>
+          <div class="opt-text-wrap">
+            <div class="opt-score-label">${['전혀','가끔','자주','매일'][i]}</div>
+            <div class="opt-label">${o.label}</div>
+          </div>
+        </button>`).join('')}
+    </div>
+    <div class="nav">
+      <button class="btn btn-ghost" onclick="go(-1)" style="${current === 0 ? 'visibility:hidden' : ''}">← 이전</button>
+      <button class="btn btn-primary" onclick="go(1)" ${answers[current] === null ? 'disabled' : ''}>
+        ${current === 8 ? '결과 보기 ✨' : '다음 →'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderResult() {
+  const total = answers.reduce((s, v) => s + (v || 0), 0);
+  const lv = getLevel(total);
+  const hasCrisis = answers[8] >= 2;
+
+  const tableRows = levels.map((l, i) => {
+    const prev = i === 0 ? 0 : levels[i-1].max + 1;
+    const isCurrent = total <= l.max && (i === 0 || total > levels[i-1].max);
+    return `<tr class="${isCurrent ? 'current' : ''}">
+      <td>${isCurrent ? '▸ ' : ''}${l.name}</td>
+      <td>${prev}–${l.max}점</td>
+    </tr>`;
+  }).join('');
+
+  const crisisNote = hasCrisis ? `
+    <div class="result-desc-card" style="background:#FAE0DC; border:1.5px solid #E8B0A8;">
+      <h3 style="color:#8C2A1E;">🌷 마음이 많이 힘드신가요?</h3>
+      <p style="color:#6B3030;">9번 문항에서 자해·자살에 대한 생각이 확인되었습니다. 혼자 감당하기 어려울 때는 꼭 도움을 받으세요.<br><br>
+      <strong>정신건강 위기상담전화</strong> ☎ 1577-0199 (24시간)<br>
+      <strong>자살예방상담전화</strong> ☎ 1393 (24시간)</p>
+    </div>` : '';
+
+  return `
+  <div class="card" style="animation-delay:0.05s">
+    <div class="result-header">
+      <div class="result-score-ring">
+        <div class="result-score-num">${total}</div>
+        <div class="result-score-max">/ 27점</div>
+      </div>
+      <div><span class="result-level-badge ${lv.cls}">${lv.name}</span></div>
+      <div class="result-title">검사가 완료되었어요</div>
+      <div class="result-sub">PHQ-9 우울 선별 검사 결과</div>
+    </div>
+
+    ${crisisNote}
+
+    <div class="result-desc-card">
+      <h3>🌿 결과 해석</h3>
+      <p>${lv.desc}</p>
+    </div>
+
+    <div class="result-desc-card" style="background:var(--cream);">
+      <h3 style="color:var(--text-m);">📋 점수 기준표</h3>
+      <table class="score-table">${tableRows}</table>
+    </div>
+
+    <div class="disclaimer">
+      이 결과는 임상적 진단이 아닙니다. 전문 상담사 또는 정신건강의학과 의사에게 상담받으시기 바랍니다.
+      PHQ-9는 Pfizer Inc.가 개발한 공개 자가보고 선별 도구입니다.
+    </div>
+    <button class="btn-restart" onclick="restart()">다시 검사하기</button>
+  </div>`;
+}
+
+function attachOpts() {
+  document.querySelectorAll('.opt-btn').forEach(el => {
+    el.addEventListener('click', () => {
+      answers[current] = parseInt(el.dataset.i);
+      render();
+    });
+  });
+}
+
+function go(dir) {
+  if (dir === 1 && current === 8) { view = 'result'; render(); return; }
+  current = Math.max(0, Math.min(8, current + dir));
+  render();
+}
+function startTest() { view = 'q'; current = 0; answers = new Array(9).fill(null); render(); }
+function restart() { view = 'intro'; answers = new Array(9).fill(null); current = 0; render(); }
+
+render();
+</script>
+</body>
+</html>
