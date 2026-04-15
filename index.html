@@ -1,587 +1,767 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마음 건강 체크 · PHQ-9 | 심리상담연구소 심지</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cream:   #FDF6EE;
-  --peach:   #F9EDE3;
-  --rose:    #F2C4B0;
-  --rose-d:  #D4896E;
-  --rose-dk: #A85E44;
-  --sage:    #C8D9BE;
-  --sage-d:  #6E9360;
-  --mist:    #E8DDD5;
-  --text:    #3D2B1F;
-  --text-m:  #7A5C4E;
-  --text-f:  #B09080;
-  --white:   #FFFCF9;
-  --r: 24px;
-  --r-lg: 32px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>제 10기 다시 태어나는 나, 나비 — 신청서</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── 색상 변수 ── */
+    :root {
+      --bg:         #FAF7F2;
+      --section-bg: #F0EBE1;
+      --card-bg:    #FFFFFF;
+      --terra:      #B07D62;
+      --terra-dark: #8C6148;
+      --olive:      #7A8C6E;
+      --olive-light:#A8B89C;
+      --text-main:  #2C1F14;
+      --text-sub:   #6B5744;
+      --text-light: #9C8776;
+      --border:     #DDD0C0;
+      --input-bg:   #FDFAF6;
+    }
 
-body {
-  font-family: 'Gowun Dodum', serif;
-  background-color: var(--cream);
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(242,196,176,0.22) 0%, transparent 50%),
-    radial-gradient(circle at 85% 80%, rgba(200,217,190,0.2) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(249,237,227,0.15) 0%, transparent 70%);
-  min-height: 100vh;
-  color: var(--text);
-  padding: 2rem 1rem 4rem;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- Layout --- */
-.wrap { max-width: 560px; margin: 0 auto; }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+    }
 
-/* --- Site header --- */
-.site-top {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  animation: floatIn 0.7s ease both;
-}
-.site-logo {
-  display: inline-block;
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 13px;
-  color: var(--text-f);
-  letter-spacing: 0.12em;
-  padding: 6px 18px;
-  border: 1px solid var(--mist);
-  border-radius: 40px;
-  background: var(--white);
-}
+    /* ── 헤더 ── */
+    .hero {
+      background: linear-gradient(160deg, #2C1F14 0%, #5C3D2A 50%, #7A5540 100%);
+      color: #FAF7F2;
+      text-align: center;
+      padding: 72px 24px 64px;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* --- Decorative circles --- */
-.deco {
-  position: fixed; pointer-events: none; z-index: 0;
-  border-radius: 50%;
-  opacity: 0.35;
-}
-.deco-1 { width: 280px; height: 280px; background: var(--rose); top: -80px; right: -80px; }
-.deco-2 { width: 200px; height: 200px; background: var(--sage); bottom: -60px; left: -60px; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(176,125,98,0.18);
+    }
 
-/* --- Card base --- */
-.card {
-  position: relative;
-  background: var(--white);
-  border-radius: var(--r-lg);
-  padding: 2rem 1.75rem;
-  border: 1px solid rgba(210,170,150,0.25);
-  box-shadow: 0 8px 32px rgba(180,120,90,0.09), 0 2px 8px rgba(180,120,90,0.05);
-  z-index: 1;
-  animation: cardIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
-}
-.card + .card { margin-top: 1rem; }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(122,140,110,0.15);
+    }
 
-/* --- Intro --- */
-.intro-icon {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.heart-circle {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 72px; height: 72px;
-  background: linear-gradient(135deg, #F9DDD3, #F2C4B0);
-  border-radius: 50%;
-  font-size: 32px;
-}
-.intro-title {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 22px; font-weight: 700;
-  color: var(--text);
-  text-align: center;
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-.intro-sub {
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-f);
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.04em;
-}
-.intro-body {
-  background: var(--peach);
-  border-radius: var(--r);
-  padding: 1.1rem 1.25rem;
-  font-size: 14px;
-  color: var(--text-m);
-  line-height: 1.85;
-  margin-bottom: 1.25rem;
-}
-.intro-body strong { color: var(--rose-dk); font-weight: 400; }
-.info-row {
-  display: flex; gap: 10px; margin-bottom: 1.5rem;
-}
-.info-pill {
-  flex: 1; text-align: center;
-  background: var(--cream);
-  border: 1px solid var(--mist);
-  border-radius: 40px;
-  padding: 8px 12px;
-  font-size: 13px;
-  color: var(--text-m);
-}
-.info-pill span { display: block; font-size: 11px; color: var(--text-f); margin-bottom: 2px; }
+    .hero-label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--olive-light);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+    }
 
-/* --- Progress dots --- */
-.progress-wrap {
-  display: flex; align-items: center; justify-content: center;
-  gap: 6px;
-  margin-bottom: 1.75rem;
-  z-index: 1;
-  position: relative;
-}
-.dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--mist);
-  transition: all 0.3s ease;
-}
-.dot.done { background: var(--rose); transform: scale(1.0); }
-.dot.active { background: var(--rose-dk); transform: scale(1.35); }
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(32px, 7vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
 
-/* --- Question card --- */
-.q-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px;
-  color: var(--text-f);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.85rem;
-}
-.q-num-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 24px; height: 24px;
-  background: var(--peach);
-  border-radius: 50%;
-  font-size: 11px;
-  color: var(--rose-dk);
-  font-weight: bold;
-}
-.q-text {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.65;
-  margin-bottom: 1.5rem;
-}
-.q-guide {
-  font-size: 12px;
-  color: var(--text-f);
-  margin-bottom: 1rem;
-  font-style: italic;
-}
+    .hero-title strong {
+      font-weight: 600;
+      color: #D4A882;
+    }
 
-/* --- Option buttons --- */
-.options { display: flex; flex-direction: column; gap: 10px; }
-.opt-btn {
-  display: flex; align-items: center; gap: 14px;
-  width: 100%;
-  background: var(--cream);
-  border: 1.5px solid transparent;
-  border-radius: 16px;
-  padding: 13px 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-  font-family: 'Gowun Dodum', serif;
-}
-.opt-btn:hover {
-  background: var(--peach);
-  border-color: var(--rose);
-  transform: translateX(3px);
-}
-.opt-btn.selected {
-  background: linear-gradient(135deg, #FDE8DF, #F9D8CB);
-  border-color: var(--rose-d);
-  transform: translateX(3px);
-}
-.opt-circle {
-  flex-shrink: 0;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 1.5px solid var(--mist);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  color: var(--text-f);
-  background: white;
-  transition: all 0.2s;
-}
-.opt-btn.selected .opt-circle {
-  background: var(--rose-d);
-  border-color: var(--rose-d);
-  color: white;
-}
-.opt-text-wrap { flex: 1; }
-.opt-score-label { font-size: 11px; color: var(--text-f); margin-bottom: 1px; }
-.opt-label { font-size: 14px; color: var(--text); }
-.opt-btn.selected .opt-label { color: var(--rose-dk); font-weight: bold; }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(250,247,242,0.65);
+      font-weight: 300;
+      margin-top: 16px;
+      letter-spacing: 1px;
+    }
 
-/* --- Navigation --- */
-.nav {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-top: 1.5rem; gap: 12px;
-}
-.btn {
-  padding: 12px 24px;
-  border-radius: 40px;
-  font-family: 'Gowun Dodum', serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-}
-.btn-ghost {
-  background: transparent;
-  border: 1.5px solid var(--mist);
-  color: var(--text-m);
-}
-.btn-ghost:hover { background: var(--peach); border-color: var(--rose); }
-.btn-primary {
-  background: linear-gradient(135deg, #E8967E, #D4896E);
-  color: white;
-  box-shadow: 0 4px 16px rgba(180,100,70,0.25);
-  flex: 1;
-}
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(180,100,70,0.3); }
-.btn-primary:disabled { background: var(--mist); color: var(--text-f); box-shadow: none; transform: none; cursor: not-allowed; }
-.btn-start {
-  width: 100%;
-  padding: 15px;
-  border-radius: 40px;
-  background: linear-gradient(135deg, #E8967E, #D4896E);
-  color: white;
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 6px 24px rgba(180,100,70,0.28);
-  transition: all 0.2s;
-  letter-spacing: 0.04em;
-}
-.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(180,100,70,0.35); }
+    /* 나비 심볼 */
+    .butterfly {
+      font-size: 40px;
+      margin-bottom: 24px;
+      display: block;
+      opacity: 0.2;
+      filter: none;
+    }
 
-/* --- Result --- */
-.result-header { text-align: center; margin-bottom: 2rem; }
-.result-score-ring {
-  position: relative;
-  display: inline-flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  width: 130px; height: 130px;
-  background: linear-gradient(135deg, #FDE8DF, #F9D5C2);
-  border-radius: 50%;
-  margin: 0 auto 1rem;
-  box-shadow: 0 8px 28px rgba(200,130,100,0.22);
-}
-.result-score-num {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 46px;
-  font-weight: 700;
-  color: var(--rose-dk);
-  line-height: 1;
-}
-.result-score-max { font-size: 13px; color: var(--text-f); margin-top: 2px; }
-.result-level-badge {
-  display: inline-block;
-  padding: 7px 20px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-.lv0 { background: #E4F0DC; color: #4A7C3A; }
-.lv1 { background: #FEF0DC; color: #8A6020; }
-.lv2 { background: #FDE4D5; color: #A04820; }
-.lv3 { background: #FAD6D0; color: #8C2A1E; }
-.lv4 { background: #F5BFBA; color: #7C1A14; }
+    /* ── 공통 컨테이너 ── */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-.result-title {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-.result-sub { font-size: 13px; color: var(--text-f); }
+    /* ── 섹션 ── */
+    .section {
+      padding: 48px 0;
+    }
 
-.result-desc-card {
-  background: var(--peach);
-  border-radius: var(--r);
-  padding: 1.25rem 1.4rem;
-  margin-bottom: 1rem;
-}
-.result-desc-card h3 {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 14px;
-  color: var(--rose-dk);
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-.result-desc-card p { font-size: 14px; color: var(--text-m); line-height: 1.8; }
+    .section + .section {
+      border-top: 1px solid var(--border);
+    }
 
-.score-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  margin-top: 4px;
-}
-.score-table td { padding: 6px 4px; color: var(--text-m); }
-.score-table td:last-child { text-align: right; color: var(--text-f); }
-.score-table tr.current td { color: var(--rose-dk); font-weight: bold; }
+    /* ── 소개 카드 ── */
+    .intro-card {
+      background: var(--section-bg);
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin: 40px 0;
+    }
 
-.disclaimer {
-  background: var(--cream);
-  border-left: 3px solid var(--rose);
-  border-radius: 0 12px 12px 0;
-  padding: 12px 16px;
-  font-size: 12px;
-  color: var(--text-f);
-  line-height: 1.7;
-  margin-top: 1rem;
-}
-.btn-restart {
-  width: 100%;
-  padding: 13px;
-  border-radius: 40px;
-  background: transparent;
-  border: 1.5px solid var(--rose);
-  color: var(--rose-dk);
-  font-family: 'Gowun Dodum', serif;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 0.75rem;
-  transition: all 0.2s;
-}
-.btn-restart:hover { background: var(--peach); }
+    .intro-card p {
+      color: var(--text-sub);
+      font-size: 14.5px;
+      line-height: 1.85;
+    }
 
-/* --- Animations --- */
-@keyframes floatIn {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
+    .intro-card p + p {
+      margin-top: 12px;
+    }
 
-/* --- Footer --- */
-.site-footer {
-  text-align: center;
-  margin-top: 3rem;
-  font-size: 11px;
-  color: var(--text-f);
-  letter-spacing: 0.06em;
-  position: relative; z-index: 1;
-}
+    /* ── 정보 박스 ── */
+    .info-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
 
-@media (max-width: 420px) {
-  body { padding: 1.5rem 0.75rem 3rem; }
-  .card { padding: 1.5rem 1.25rem; }
-  .q-text { font-size: 16px; }
-  .info-row { flex-direction: column; }
-}
-</style>
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 14px 20px;
+      gap: 16px;
+      border-bottom: 1px solid #EDE4D8;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-label {
+      font-size: 12px;
+      color: var(--terra);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      min-width: 64px;
+      padding-top: 1px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text-main);
+      flex: 1;
+    }
+
+    /* ── 회기 스크롤 카드 ── */
+    .session-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-main);
+      margin: 36px 0 4px;
+    }
+
+    .session-hint {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .session-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      margin: 0 -20px;
+      padding: 4px 20px 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .session-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .session-scroll::-webkit-scrollbar-track { background: transparent; }
+    .session-scroll::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .session-card {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 170px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .session-card.card-zero {
+      border-color: var(--olive-light);
+      background: #F5F7F2;
+    }
+
+    .sc-num {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .sc-stage {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--terra);
+      line-height: 1.2;
+    }
+
+    .session-card.card-zero .sc-stage {
+      color: var(--olive);
+    }
+
+    .sc-name {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 400;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* ── 폼 ── */
+    .form-section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .form-section-desc {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    label .required {
+      color: var(--terra);
+      margin-left: 3px;
+    }
+
+    label .optional {
+      color: var(--text-light);
+      font-size: 12px;
+      font-weight: 300;
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--text-main);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-light);
+      font-weight: 300;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--terra);
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    /* 라디오/체크박스 */
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-item,
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .radio-item input,
+    .check-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--terra);
+      margin-top: 2px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .radio-item span,
+    .check-item span {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* 동의 박스 */
+    .agree-box {
+      background: var(--section-bg);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .agree-box p {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .agree-warning {
+      font-size: 12px;
+      color: var(--terra);
+      margin-top: 6px;
+    }
+
+    /* 구분선 */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    /* 제출 버튼 */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: var(--terra);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 17px;
+      font-size: 16px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: var(--terra-dark);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* 계좌 안내 */
+    .payment-box {
+      background: linear-gradient(135deg, #F5EDE3, #EDE4D8);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 24px 0;
+    }
+
+    .payment-box .p-label {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--terra);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .payment-box .p-amount {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .payment-box .p-account {
+      font-size: 13.5px;
+      color: var(--text-sub);
+    }
+
+    .payment-box .p-note {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    /* 푸터 */
+    footer {
+      background: #2C1F14;
+      color: rgba(250,247,242,0.55);
+      text-align: center;
+      padding: 36px 20px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: var(--olive-light);
+      text-decoration: none;
+    }
+
+    footer .footer-logo {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      color: rgba(250,247,242,0.85);
+      margin-bottom: 8px;
+    }
+
+    /* 모바일 */
+    @media (max-width: 480px) {
+      .hero { padding: 56px 20px 48px; }
+      .container { padding: 0 16px; }
+      .intro-card { padding: 24px 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="deco deco-1"></div>
-<div class="deco deco-2"></div>
-
-<div class="wrap">
-  <div class="site-top">
-    <span class="site-logo">심리상담연구소 심지</span>
-  </div>
-  <div id="app"></div>
-  <div class="site-footer">© 심리상담연구소 심지 · 아들러 개인심리학 기반 상담</div>
+<!-- ── 히어로 헤더 ── -->
+<div class="hero">
+  <span class="butterfly">🦋</span>
+  <p class="hero-label">심리상담연구소 심지 · 제 10기</p>
+  <h1 class="hero-title">다시 태어나는 나,<br><strong>나비</strong></h1>
+  <p class="hero-sub">십우도 × 타로 × 아들러 심리학</p>
 </div>
 
-<script>
-const questions = [
-  { title: "흥미와 즐거움", text: "일 또는 여가 활동을 하는 데 흥미나 즐거움을 거의 느끼지 못했다." },
-  { title: "우울감·무력감", text: "기분이 가라앉거나, 우울하거나, 희망이 없다고 느꼈다." },
-  { title: "수면 문제", text: "잠이 들거나 계속 잠을 자는 것이 어려웠다. 또는 잠을 너무 많이 잤다." },
-  { title: "피로·기운 없음", text: "피곤함을 느끼거나 기운이 거의 없었다." },
-  { title: "식욕 변화", text: "식욕이 없거나 과식을 했다." },
-  { title: "자기 비난", text: "자신이 실패자로 여겨지거나, 자신 또는 가족을 실망시켰다고 느꼈다." },
-  { title: "집중 어려움", text: "신문을 읽거나 TV를 보는 것처럼 일상적인 일에도 집중하기 어려웠다." },
-  { title: "행동·말투 변화", text: "다른 사람이 알아챌 정도로 너무 느리게 움직이거나 말했다. 또는 반대로 평소보다 안절부절 못하거나 들떠 있었다." },
-  { title: "자해·죽음에 대한 생각", text: "자신이 죽는 것이 더 낫겠다는 생각 또는 어떤 식으로든 자신을 해치겠다는 생각을 했다." }
-];
+<!-- ── 소개 ── -->
+<div class="container">
+  <div class="section">
 
-const options = [
-  { label: "전혀 없었다", score: 0 },
-  { label: "며칠 동안", score: 1 },
-  { label: "7일 이상", score: 2 },
-  { label: "거의 매일", score: 3 }
-];
-
-const levels = [
-  { max: 4,  cls: "lv0", name: "정상 범위", desc: "현재 우울 증상이 거의 없는 건강한 상태입니다. 지금처럼 자신을 잘 돌봐 주세요." },
-  { max: 9,  cls: "lv1", name: "가벼운 우울", desc: "경미한 우울 증상이 있습니다. 충분한 휴식과 자기 돌봄이 도움이 될 수 있으며, 증상이 지속되면 전문가 상담을 권장합니다." },
-  { max: 14, cls: "lv2", name: "중간 수준의 우울", desc: "일상생활에서 어려움을 느낄 수 있는 수준입니다. 전문 상담사나 의사와의 상담을 권장합니다." },
-  { max: 19, cls: "lv3", name: "중간~심한 우울", desc: "일상적인 기능이 상당히 저하될 수 있는 수준입니다. 가능한 빠른 시일 내에 전문 정신건강 전문가의 도움을 받으시기 바랍니다." },
-  { max: 27, cls: "lv4", name: "심한 우울", desc: "즉각적인 전문가 도움이 필요한 수준입니다. 가까운 정신건강 복지센터나 병·의원을 방문하시거나, 정신건강 위기상담 전화(☎ 1577-0199)에 연락해 주세요." }
-];
-
-let answers = new Array(9).fill(null);
-let current = 0;
-let view = 'intro';
-
-function getLevel(score) {
-  return levels.find(l => score <= l.max) || levels[levels.length - 1];
-}
-
-function render() {
-  document.getElementById('app').innerHTML =
-    view === 'intro'  ? renderIntro()  :
-    view === 'result' ? renderResult() : renderQ();
-  if (view === 'q') attachOpts();
-}
-
-function renderDots() {
-  return `<div class="progress-wrap">
-    ${questions.map((_, i) => {
-      const cls = i < current ? 'done' : i === current ? 'active' : '';
-      return `<div class="dot ${cls}"></div>`;
-    }).join('')}
-  </div>`;
-}
-
-function renderIntro() {
-  return `
-  <div class="card" style="animation-delay:0.05s">
-    <div class="intro-icon"><div class="heart-circle">🌸</div></div>
-    <div class="intro-title">마음 건강 체크</div>
-    <div class="intro-sub">PHQ-9 우울 선별 검사</div>
-    <div class="intro-body">
-      <strong>지난 2주 동안</strong>, 아래 문제들로 인해 얼마나 자주 불편함을 느끼셨나요?<br>
-      각 문항을 읽고 자신에게 해당하는 답변을 솔직하게 선택해 주세요.<br>
-      정확하게 응답할수록 더 도움이 되는 결과를 얻을 수 있어요.
+    <div class="intro-card">
+      <p>십우도와 타로를 활용한 아들러 성장프로그램 '다시 태어나는 나, 나비'는 총 11회기 진행을 통해 아들러 심리학을 경험하며 성장을 실천하는 프로그램입니다.</p>
+      <p>지금 여기, 이미 충분한 마음자리를 향합니다.</p>
     </div>
-    <div class="info-row">
-      <div class="info-pill"><span>문항 수</span>9문항</div>
-      <div class="info-pill"><span>소요 시간</span>약 3분</div>
-      <div class="info-pill"><span>검사 방식</span>자기 보고</div>
-    </div>
-    <button class="btn-start" onclick="startTest()">검사 시작하기 🌿</button>
-  </div>
-  <div class="card" style="animation-delay:0.15s; padding: 1rem 1.5rem;">
-    <p style="font-size:12px; color:var(--text-f); line-height:1.8; text-align:center;">
-      이 검사는 전문적 진단을 대체하지 않습니다.<br>심각한 증상이 의심될 경우 전문가와 상담하세요.
-    </p>
-  </div>`;
-}
 
-function renderQ() {
-  const q = questions[current];
-  return `
-  ${renderDots()}
-  <div class="card">
-    <div class="q-label">
-      <div class="q-num-badge">${current + 1}</div>
-      ${q.title}
-    </div>
-    <div class="q-text">${q.text}</div>
-    <div class="q-guide">지난 2주 동안의 경험을 바탕으로 선택해 주세요.</div>
-    <div class="options">
-      ${options.map((o, i) => `
-        <button class="opt-btn${answers[current] === i ? ' selected' : ''}" data-i="${i}">
-          <div class="opt-circle">${o.score}</div>
-          <div class="opt-text-wrap">
-            <div class="opt-score-label">${['전혀','가끔','자주','매일'][i]}</div>
-            <div class="opt-label">${o.label}</div>
-          </div>
-        </button>`).join('')}
-    </div>
-    <div class="nav">
-      <button class="btn btn-ghost" onclick="go(-1)" style="${current === 0 ? 'visibility:hidden' : ''}">← 이전</button>
-      <button class="btn btn-primary" onclick="go(1)" ${answers[current] === null ? 'disabled' : ''}>
-        ${current === 8 ? '결과 보기 ✨' : '다음 →'}
-      </button>
-    </div>
-  </div>`;
-}
-
-function renderResult() {
-  const total = answers.reduce((s, v) => s + (v || 0), 0);
-  const lv = getLevel(total);
-  const hasCrisis = answers[8] >= 2;
-
-  const tableRows = levels.map((l, i) => {
-    const prev = i === 0 ? 0 : levels[i-1].max + 1;
-    const isCurrent = total <= l.max && (i === 0 || total > levels[i-1].max);
-    return `<tr class="${isCurrent ? 'current' : ''}">
-      <td>${isCurrent ? '▸ ' : ''}${l.name}</td>
-      <td>${prev}–${l.max}점</td>
-    </tr>`;
-  }).join('');
-
-  const crisisNote = hasCrisis ? `
-    <div class="result-desc-card" style="background:#FAE0DC; border:1.5px solid #E8B0A8;">
-      <h3 style="color:#8C2A1E;">🌷 마음이 많이 힘드신가요?</h3>
-      <p style="color:#6B3030;">9번 문항에서 자해·자살에 대한 생각이 확인되었습니다. 혼자 감당하기 어려울 때는 꼭 도움을 받으세요.<br><br>
-      <strong>정신건강 위기상담전화</strong> ☎ 1577-0199 (24시간)<br>
-      <strong>자살예방상담전화</strong> ☎ 1393 (24시간)</p>
-    </div>` : '';
-
-  return `
-  <div class="card" style="animation-delay:0.05s">
-    <div class="result-header">
-      <div class="result-score-ring">
-        <div class="result-score-num">${total}</div>
-        <div class="result-score-max">/ 27점</div>
+    <!-- 기본 정보 -->
+    <div class="info-box">
+      <div class="info-row">
+        <span class="info-label">일정</span>
+        <span class="info-value">2026년 5월 4일(월) ~ 7월 20일(월)<br>매주 월요일 저녁 7:30 ~ 10:00</span>
       </div>
-      <div><span class="result-level-badge ${lv.cls}">${lv.name}</span></div>
-      <div class="result-title">검사가 완료되었어요</div>
-      <div class="result-sub">PHQ-9 우울 선별 검사 결과</div>
+      <div class="info-row">
+        <span class="info-label">진행</span>
+        <span class="info-value">온라인 줌(Zoom)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">회기</span>
+        <span class="info-value">11회기 (5/25 석가탄신일 휴강)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">인원</span>
+        <span class="info-value">성인 5명 선착순</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">강사</span>
+        <span class="info-value">김이수 (심리상담연구소 심지 소장, 아들러전문상담사 1급)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">신청마감</span>
+        <span class="info-value">2026년 5월 1일(금)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">준비물</span>
+        <span class="info-value">
+          스텔라 타로카드 (참가자 구매)<br>
+          <span style="font-size:13px; color:var(--text-light);">가지고 계신 타로가 있으시면 별도 구매하지 않으셔도 됩니다.</span><br>
+          <a href="https://product.kyobobook.co.kr/detail/S000001585245" target="_blank" style="font-size:13px; color:var(--terra); text-decoration:none;">→ 교보문고 구입처 바로가기</a>
+        </span>
+      </div>
     </div>
 
-    ${crisisNote}
-
-    <div class="result-desc-card">
-      <h3>🌿 결과 해석</h3>
-      <p>${lv.desc}</p>
+    <!-- 참가비 -->
+    <div class="payment-box">
+      <p class="p-label">참가비</p>
+      <p class="p-amount">35만원</p>
+      <p class="p-account">농협 356-0249-5526-13 &nbsp;|&nbsp; 예금주: 김이수</p>
+      <p class="p-note">* 입금 후 신청이 확정됩니다.</p>
     </div>
 
-    <div class="result-desc-card" style="background:var(--cream);">
-      <h3 style="color:var(--text-m);">📋 점수 기준표</h3>
-      <table class="score-table">${tableRows}</table>
+    <!-- 회기 구성 -->
+    <h2 class="session-title">프로그램 흐름</h2>
+    <p class="session-hint">옆으로 스크롤해서 전체 11회기를 확인해보세요</p>
+    <div class="session-scroll">
+
+      <div class="session-card card-zero">
+        <span class="sc-num">0회기</span>
+        <span class="sc-stage">오리엔테이션</span>
+        <span class="sc-name">초보 타로리더 되기</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">1회기</span>
+        <span class="sc-stage">심우</span>
+        <span class="sc-name">변화하고 싶은 나</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">2회기</span>
+        <span class="sc-stage">견적</span>
+        <span class="sc-name">어린시절의 나를 만나다</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">3회기</span>
+        <span class="sc-stage">견우</span>
+        <span class="sc-name">생활양식 탐색하기</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">4회기</span>
+        <span class="sc-stage">득우</span>
+        <span class="sc-name">풀고, 치유하고<br>흘려보내기</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">5회기</span>
+        <span class="sc-stage">목우</span>
+        <span class="sc-name">다시 날개를 펴다</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">6회기</span>
+        <span class="sc-stage">기우귀가</span>
+        <span class="sc-name">자유로운 창조의 힘</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">7회기</span>
+        <span class="sc-stage">망주존인</span>
+        <span class="sc-name">나의 시선으로 세상열기</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">8회기</span>
+        <span class="sc-stage">인우구망</span>
+        <span class="sc-name">내 삶의 길잡이 별</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">9회기</span>
+        <span class="sc-stage">반본환원</span>
+        <span class="sc-name">불완전할 용기</span>
+      </div>
+
+      <div class="session-card">
+        <span class="sc-num">10회기</span>
+        <span class="sc-stage">입전수수</span>
+        <span class="sc-name">함께 날아 아름다운 세상</span>
+      </div>
+
     </div>
 
-    <div class="disclaimer">
-      이 결과는 임상적 진단이 아닙니다. 전문 상담사 또는 정신건강의학과 의사에게 상담받으시기 바랍니다.
-      PHQ-9는 Pfizer Inc.가 개발한 공개 자가보고 선별 도구입니다.
-    </div>
-    <button class="btn-restart" onclick="restart()">다시 검사하기</button>
-  </div>`;
-}
+  </div><!-- /section -->
 
-function attachOpts() {
-  document.querySelectorAll('.opt-btn').forEach(el => {
-    el.addEventListener('click', () => {
-      answers[current] = parseInt(el.dataset.i);
-      render();
+  <!-- ── 신청 폼 ── -->
+  <div class="section">
+    <h2 class="form-section-title">신청하기</h2>
+    <p class="form-section-desc">아래 내용을 작성해 주시면 확인 후 안내 메일을 드립니다.<br>신청 후 참가비 입금 시 최종 확정됩니다.</p>
+
+    <form
+      id="nabiForm"
+      action="https://script.google.com/macros/s/AKfycby9kpVpJzOYYikKKuxHxzV-J_2iU5tgXG-NjFLX223nW3WPO7xmKTrzDfvdEaWRD4WS/exec"
+      method="POST"
+    >
+
+      <!-- 1. 이름 -->
+      <div class="form-group">
+        <label>참가자 성명 <span class="required">*</span></label>
+        <input type="text" name="이름" placeholder="이름을 입력해주세요" required />
+      </div>
+
+      <!-- 2. 연락처 -->
+      <div class="form-group">
+        <label>연락처 <span class="required">*</span></label>
+        <input type="tel" name="연락처" placeholder="010-0000-0000 (-없이 번호만 입력)" required />
+      </div>
+
+      <!-- 3. 이메일 -->
+      <div class="form-group">
+        <label>이메일 <span class="required">*</span></label>
+        <input type="email" name="이메일" placeholder="안내 메일을 받으실 이메일 주소" required />
+        <input type="hidden" name="_replyto" id="replyto" />
+      </div>
+
+      <!-- 4. 타로 경험 -->
+      <div class="form-group">
+        <label>타로를 활용한 경험이 있으신가요? <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="타로경험" value="잘 활용할 수 있습니다" required />
+            <span>네, 타로를 잘 활용할 수 있습니다</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="타로경험" value="약간의 체험 경험이 있습니다" />
+            <span>약간의 체험 경험이 있습니다</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="타로경험" value="처음 접합니다" />
+            <span>타로는 처음 접합니다</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 5. 비밀유지 / 사례연구 동의 -->
+      <div class="form-group">
+        <label>프로그램 참여 동의 <span class="required">*</span></label>
+        <div class="agree-box">
+          <p>우리가 함께 나누는 이야기는 이 안에서만 머뭅니다.<br>서로의 이야기를 안전하게 담아줄 수 있도록, 비밀을 지켜주는 것을 함께 약속해주세요.</p>
+          <div class="radio-group" style="margin-top:12px">
+            <label class="radio-item">
+              <input type="radio" name="동의여부" value="동의합니다" required />
+              <span>동의합니다</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="동의여부" value="동의하지 않습니다" />
+              <span>동의하지 않습니다</span>
+            </label>
+          </div>
+          <p class="agree-warning">* 동의하지 않으시면 프로그램 참여가 어렵습니다.</p>
+        </div>
+      </div>
+
+      <!-- 6. 소식 수신 -->
+      <div class="form-group">
+        <label>소식 받아보기 <span class="optional">(선택)</span></label>
+        <div class="checkbox-group">
+          <label class="check-item">
+            <input type="checkbox" name="소식수신" value="심지 소식 구독" />
+            <span>심지의 새로운 소식을 가장 먼저 받아보겠습니다</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="이음이구독" value="이음이 구독" />
+            <span>한국아들러상담학회 부모교육분과 소식지 <strong>이음이</strong>를 받아보겠습니다</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 7. 참여 동기 -->
+      <div class="form-group">
+        <label>참여 동기 및 바라는 점 <span class="optional">(선택)</span></label>
+        <textarea name="참여동기" placeholder="프로그램에 참여하게 된 동기나 기대하시는 점을 자유롭게 적어주세요."></textarea>
+      </div>
+
+      <!-- 제출 -->
+      <button type="submit" class="submit-btn">신청서 제출하기</button>
+
+    </form>
+
+    <p style="text-align:center; font-size:12px; color:var(--text-light); margin-top:20px;">
+      문의: <a href="mailto:simjimind@gmail.com" style="color:var(--terra)">simjimind@gmail.com</a>
+      &nbsp;|&nbsp; 031-763-4948
+    </p>
+
+  </div><!-- /section -->
+</div><!-- /container -->
+
+<!-- ── 푸터 ── -->
+<footer>
+  <p class="footer-logo">심리상담연구소 心地</p>
+  <p>경기도 광주 &nbsp;|&nbsp; 031-763-4948</p>
+  <p style="margin-top:6px">
+    <a href="https://simjimind.co.kr">simjimind.co.kr</a>
+    &nbsp;|&nbsp;
+    <a href="https://instagram.com/simjimind">@simjimind</a>
+  </p>
+</footer>
+
+<script>
+  // Form 제출 처리
+  document.getElementById('nabiForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // 제출 버튼 비활성화 (중복 제출 방지)
+    var submitBtn = document.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '제출 중...';
+
+    // 폼 데이터를 Google Apps Script로 전송
+    var formData = new FormData(this);
+
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(function(){
+      // 제출 성공 후 감사 페이지로 이동
+      window.location.href = 'https://simjimind.github.io/nabi_apply_2026/thanks.html';
+    })
+    .catch(function(error){
+      // 에러 발생 시
+      alert('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '신청서 제출하기';
+      console.error('Error:', error);
     });
   });
-}
-
-function go(dir) {
-  if (dir === 1 && current === 8) { view = 'result'; render(); return; }
-  current = Math.max(0, Math.min(8, current + dir));
-  render();
-}
-function startTest() { view = 'q'; current = 0; answers = new Array(9).fill(null); render(); }
-function restart() { view = 'intro'; answers = new Array(9).fill(null); current = 0; render(); }
-
-render();
 </script>
+
 </body>
 </html>
